@@ -1,0 +1,31 @@
+type Montadora {
+  id: ID!
+  nome: String!
+  pais: String!
+  ano_fundacao: Int!
+  veiculos: [Veiculo!]
+}
+
+type Veiculo {
+  id: ID!
+  modelo: String!
+  ano: Int!
+  montadora: Montadora!
+}
+
+type Query {
+  montadoras: [Montadora!]
+  veiculos: [Veiculo!]
+  veiculosByMontadora(montadoraId: ID!): [Veiculo!] # Nova consulta
+  montadora(id: ID!): Montadora
+  veiculo(id: ID!): Veiculo
+}
+
+type Mutation {
+  criarMontadora(nome: String!, pais: String!, ano_fundacao: Int!): Montadora!
+  atualizarMontadora(id: ID!, nome: String!, pais: String!, ano_fundacao: Int!): Montadora!
+  removerMontadora(id: ID!): Boolean
+  criarVeiculo(modelo: String!, ano: Int!, montadoraId: ID!): Veiculo!
+  atualizarVeiculo(id: ID!, modelo: String!, ano: Int!): Veiculo!
+  removerVeiculo(id: ID!): Boolean
+}
